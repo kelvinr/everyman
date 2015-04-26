@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title
+      | Everyman
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    #site-wrapper
+      #site-canvas
+        =render 'layouts/nav'
+        .container
+          = yield
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true

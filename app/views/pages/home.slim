@@ -1,0 +1,14 @@
+.row.separator
+  .catch
+    h1 
+      | It's your time.
+      br
+      | What'll you do with it?
+    =link_to "Start today", "#", class: 'btn join'
+    =link_to "Learn more", about_path
+  #carousel
+    ul
+      li= image_tag "study.jpg", class: 'img-responsive'
+      li= image_tag "programming.jpg", class: 'img-responsive'
+      li= image_tag "jogging.jpg", class: 'img-responsive'
+      li= image_tag "photo.jpg", class: 'img-responsive'

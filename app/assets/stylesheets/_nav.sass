@@ -1,0 +1,71 @@
+#site-wrapper
+  width: 100%
+  overflow: hidden
+
+#site-canvas
+  width: 100%
+  position: relative
+
+  -webkit-transform: translateX(0)
+  -moz-transform: translateX(0)
+  transform: translateX(0)
+  -webkit-transform: translate3d(0, 0, 0)
+  -moz-transform: translateX(0)
+  transform: translate3d(0, 0, 0)
+  -webkit-transition: 300ms ease all
+  -moz-transition: translateX(0)
+  transition: 300ms ease all
+
+#site-menu
+  width: 20em
+  height: 115%
+  position: absolute
+  top: 0
+  left: -20em
+  text-align: center
+  a
+    color: #09227c
+    &:hover
+      text-decoration: none
+      color: rgba(253, 143, 0, 1)
+
+#site-wrapper.show-nav #site-canvas
+  -webkit-transform: translateZ(0) translateX(20em)
+  -moz-transform: translateZ(0) translateX(20em)
+  transform: translateZ(0) translateX(20em)
+  
+.nav-toggle
+  @include make-xs-column(2)
+  @include make-md-column(1)
+  height: 96px
+  position: relative
+  -webkit-perspective: 500px
+  perspective: 500px
+  padding: 0 0 0 1em
+
+#toggle
+  width: 100%
+  height: 100%
+  position: absolute
+  -webkit-transform-style: preserve-3d
+  -moz-transform-style: preserve-3d
+  transform-style: preserve-3d
+  -webkit-transition: -webkit-transform 500ms
+  transition: transform 500ms
+  -webkit-transform-origin: right center
+  -moz-transform-origin: right center
+  transform-origin: right center
+  img
+    display: block
+    position: absolute
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+  .back
+    -webkit-transform: rotateY(180deg)
+    -moz-transform: rotateY(180deg)
+    transform: rotateY(180deg)
+
+#toggle.flipped
+  -webkit-transform: translateX(-100%) rotateY(-180deg)
+  -moz-transform: translateX(-100%) rotateY(-180deg)
+  transform: translateX(-100%) rotateY(-180deg)
