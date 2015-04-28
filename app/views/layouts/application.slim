@@ -11,4 +11,5 @@ html
         =render 'layouts/nav'
         .container
           = yield
-  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield :javascript

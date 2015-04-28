@@ -1,9 +1,8 @@
 nav.header
   section
-    .nav-toggle
-      #toggle
-        =image_tag "sheep.png", class: 'front'
-        =image_tag "close.png", class: 'back'
+    #nav-toggle
+      = image_tag "sheep.png", class: 'front'
+      = image_tag "close.png", class: 'back'
     #site-menu
       h2= link_to "Home", root_path
       h2= link_to "Learn more", about_path

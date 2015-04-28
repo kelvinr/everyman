@@ -4,7 +4,7 @@
       | It's your time.
       br
       | What'll you do with it?
-    =link_to "Start today", "#", class: 'btn join'
+    =link_to "Start today", new_user_path, class: 'btn join'
     =link_to "Learn more", about_path
   #carousel
     ul
@@ -12,3 +12,5 @@
       li= image_tag "programming.jpg", class: 'img-responsive'
       li= image_tag "jogging.jpg", class: 'img-responsive'
       li= image_tag "photo.jpg", class: 'img-responsive'
+- content_for :javascript do
+  = javascript_include_tag 'carousel'

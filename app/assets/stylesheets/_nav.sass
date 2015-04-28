@@ -4,6 +4,7 @@
 
 #site-canvas
   width: 100%
+  height: 100%
   position: relative
 
   -webkit-transform: translateX(0)
@@ -18,7 +19,7 @@
 
 #site-menu
   width: 20em
-  height: 115%
+  height: 100%
   position: absolute
   top: 0
   left: -20em
@@ -33,20 +34,16 @@
   -webkit-transform: translateZ(0) translateX(20em)
   -moz-transform: translateZ(0) translateX(20em)
   transform: translateZ(0) translateX(20em)
-  
-.nav-toggle
+
+#nav-toggle
   @include make-xs-column(2)
   @include make-md-column(1)
-  height: 96px
-  position: relative
   -webkit-perspective: 500px
   perspective: 500px
   padding: 0 0 0 1em
-
-#toggle
-  width: 100%
-  height: 100%
-  position: absolute
+  height: 96px
+  width: 96px
+  position: relative
   -webkit-transform-style: preserve-3d
   -moz-transform-style: preserve-3d
   transform-style: preserve-3d
@@ -65,7 +62,7 @@
     -moz-transform: rotateY(180deg)
     transform: rotateY(180deg)
 
-#toggle.flipped
+#nav-toggle.flipped
   -webkit-transform: translateX(-100%) rotateY(-180deg)
   -moz-transform: translateX(-100%) rotateY(-180deg)
   transform: translateX(-100%) rotateY(-180deg)

@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require custom
-//= require bootstrap
 //= require turbolinks
-//= require_tree .
+//= require bootstrap
+//= require global

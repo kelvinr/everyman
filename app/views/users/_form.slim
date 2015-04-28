@@ -1,0 +1,27 @@
+=render 'shared/errors', obj: @user
+.user-form
+  h1 Registration
+  = form_for @user do |f|
+    .input
+      = f.label :username, "Username / Email"
+      .field
+        = f.text_field :username
+    
+    .input
+      = f.label :phone_number, "Phone #"
+      .field
+        = f.text_field :phone_number, maxlength: "10"
+        
+    .input
+      = f.label :password
+      .field
+        = f.password_field :password
+        
+    .input
+      = f.label :password_confirmation, "Confirmation"
+      .field
+        = f.password_field :password_confirmation
+    
+    .input
+      = f.submit "Create Profile", class: 'btn btn-success'
+        
