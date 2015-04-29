@@ -4,7 +4,8 @@
       | It's your time.
       br
       | What'll you do with it?
-    =link_to "Start today", new_user_path, class: 'btn join'
+    -if !logged_in?
+      =link_to "Start today", register_path, class: 'btn-dark'
     =link_to "Learn more", about_path
   #carousel
     ul

@@ -1,4 +1,4 @@
-nav.header
+#header
   section
     #nav-toggle
       = image_tag "sheep.png", class: 'front'
@@ -8,5 +8,21 @@ nav.header
       h2= link_to "Learn more", about_path
     .page-title
       h1 Everyman
+    .user-ctrl
+      -if logged_in?
+        h3.dropdown
+          .btn-dark.dropdown-toggle data-toggle="dropdown"
+            = current_user.username
+            span.caret<
+          ul.dropdown-menu
+            li= link_to user_path(current_user) do
+              i.glyphicon.glyphicon-user>
+              | Profile
+            li= link_to logout_path, method: :delete do
+              i.glyphicon.glyphicon-log-out>
+              | Logout
+      -else
+        h3= link_to "Login", login_path, class: 'btn-dark'
+    
 
           

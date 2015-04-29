@@ -21,32 +21,46 @@ section
   @extend .well, .well-sm
   background-color: rgba(220, 220, 220, 0.8)
   h1
+    font-family: 'Poiret One', cursive
     text-align: center
 
 //###################
 //    Page header   #
 //###################
 
-.header
+#header
   @include make-xs-column(12)
   text-align: center
+
+  h1
+    text-shadow: .12em .15em .1em
+  h1, h3
+    display: inline-block
+    font-family: 'Poiret One', cursive
+    font-weight: 600
+  .dropdown:hover
+    color: #9a3e2a
+    font-style: italic
 
 .page-title
   @include make-xs-column(8)
   @include make-md-column-offset(1)
-  h1
-    font-family: 'Poiret One', cursive
-    font-weight: 600
-    text-shadow: .12em .15em .1em
+
+.user-cntrl
+  @include make-xs-column(12)
+  @include make-md-column(2)
 
 //###################
 // Carousel / Home  #
 //###################
 
 #carousel
+  @include make-xs-column(12)
   @include make-md-column(7)
   overflow: hidden
-  padding-left: 0
+  padding: 0
+  @media (min-width: $screen-md-min)
+    padding-right: 15px
   border: 3px solid rgba(150, 181, 186, 0.8)
   border-radius: 2px
   box-shadow: 1px 2px 4px 1px rgba(150, 186, 155, 0.8)
@@ -81,7 +95,8 @@ section
   @media (min-width: $screen-md-min)
     margin-top: 8em
 
-.join
+.btn-dark
+  @extend .btn
   @include button-variant(#fff, $black, $dark-grey)
   &:hover
     background-color: lighten($black, 18%)
@@ -120,8 +135,10 @@ form
       input
         @extend .form-control
 
-.user-form
+#user-form
   @extend .form-horizontal, .area
   @include make-xs-column(12)
   @include make-md-column(8)
   @include make-md-column-offset(2)
+  p
+    text-align: center
