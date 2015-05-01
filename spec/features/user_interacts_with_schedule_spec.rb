@@ -7,8 +7,8 @@ feature "User interacts with schedule" do
     visit new_schedule_path
 
     within("#new_schedule") do
-      fill_in "Start date", with: Time.new
-      fill_in "End date", with: Time.new
+      fill_in "Start date", with: Date.new
+      fill_in "End date", with: Date.new
       fill_in "Daily sleep goal", with: Time.new
       fill_in "Core sleep", with: Time.new
       fill_in "Total Naps", with: 4
@@ -24,8 +24,8 @@ feature "User interacts with schedule" do
     visit new_schedule_path
 
     within("#new_schedule") do
-      fill_in "Start date", with: Time.new
-      fill_in "End date", with: Time.new
+      fill_in "Start date", with: Date.new
+      fill_in "End date", with: Date.new
       fill_in "Daily sleep goal", with: Time.new
       fill_in "Core sleep", with: Time.new
       fill_in "Total Naps", with: nil

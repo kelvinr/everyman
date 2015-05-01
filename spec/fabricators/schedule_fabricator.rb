@@ -1,6 +1,6 @@
 Fabricator(:schedule) do
   user { Fabricate(:user) }
-  start_date { Time.new }
+  start_date { Date.new }
   daily_sleep_goal { Time.new }
   core_sleep { Time.new }
   nap_count { (1..6).to_a.sample }

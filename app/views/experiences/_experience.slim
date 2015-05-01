@@ -1,0 +1,13 @@
+.container.area
+  h4=experience.title
+  p
+    =experience.body
+  small
+    = experience.user.username
+    '  | posted
+    = time_ago_in_words(experience.created_at)
+  -if logged_in? && experience.user == current_user
+    small.pull-right
+      = link_to edit_experience_path(experience) do
+        i.glyphicon.glyphicon-edit>
+        '  Edit

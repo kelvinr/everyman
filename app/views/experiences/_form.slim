@@ -1,0 +1,17 @@
+= render 'shared/errors', obj: @experience
+
+#content-form
+  h2 Experiences
+  = form_for @experience do |f|
+    .input
+      = f.label :title
+      .field
+        = f.text_field :title
+    
+    .input
+      = f.label :body
+      .field
+        = f.text_area :body, rows: 10
+    
+    .input
+      = f.submit @experience.new_record? ? "Publish" : "Save Changes", class: 'btn btn-primary'

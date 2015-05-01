@@ -2,9 +2,11 @@ require 'rails_helper'
 
 describe SchedulesController do
   let(:bob) { Fabricate(:user) }
+
+  before { set_current_user(bob) }
+
   describe "GET new" do
     it "sets @schedule" do
-      set_current_user
       get :new
       expect(assigns(:schedule)).to be_a_new(Schedule)
     end
@@ -16,25 +18,21 @@ describe SchedulesController do
 
   describe "POST create" do
     it "creates schedule with valid input" do
-      set_current_user(bob)
       post :create, schedule: Fabricate.attributes_for(:schedule)
       expect(Schedule.count).to eq(1)
     end
 
     it "redirects to user page on valid save" do
-      set_current_user(bob)
       post :create, schedule: Fabricate.attributes_for(:schedule)
       expect(response).to redirect_to bob
     end
 
     it "sets flash on successful save" do
-      set_current_user(bob)
       post :create, schedule: Fabricate.attributes_for(:schedule)
       expect(flash[:success]).not_to be_nil
     end
 
     it "renders the new template with invalid input" do
-      set_current_user(bob)
       post :create, schedule: Fabricate.attributes_for(:schedule, start_date: nil)
       expect(response).to render_template :new
     end
@@ -46,7 +44,6 @@ describe SchedulesController do
 
   describe "GET edit" do
     it "sets @schedule to current users schedule" do
-      set_current_user(bob)
       get :edit, id: Fabricate(:schedule, user: bob).id
       expect(assigns(:schedule)).to eq(bob.schedule)
     end
@@ -57,30 +54,24 @@ describe SchedulesController do
   end
 
   describe "POST update" do
+    let(:schedule) { Fabricate(:schedule, user: bob) }
+
     it "updates schedule with valid input" do
-      set_current_user(bob)
-      schedule = Fabricate(:schedule, user: bob, nap_count: 3)
-      post :update, id: schedule.id, schedule: {nap_count: 4}
-      expect(bob.reload.nap_count).to eq(4)
+      post :update, id: schedule.id, schedule: {nap_count: 7}
+      expect(bob.reload.nap_count).to eq(7)
     end
 
     it "sets the flash message" do
-      set_current_user(bob)
-      schedule = Fabricate(:schedule, user: bob)
       post :update, id: schedule.id, schedule: schedule.attributes
       expect(flash[:success]).not_to be_nil
     end
 
     it "redirects to the users page with valid input" do
-      set_current_user(bob)
-      schedule = Fabricate(:schedule, user: bob)
       post :update, id: schedule.id, schedule: schedule.attributes
       expect(response).to redirect_to bob
     end
 
     it "renders edit when invalid input" do
-      set_current_user(bob)
-      schedule = Fabricate(:schedule, user: bob)
       post :update, id: schedule.id, schedule: {start_date: nil}
       expect(response).to render_template :edit
     end
