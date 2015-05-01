@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :create]
   get '/register' => 'users#new'
+
+  resources :schedules
 end

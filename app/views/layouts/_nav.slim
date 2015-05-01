@@ -18,6 +18,14 @@
             li= link_to user_path(current_user) do
               i.glyphicon.glyphicon-user>
               | Profile
+            -if current_user.schedule == nil
+              li= link_to new_schedule_path do
+                i.glyphicon.glyphicon-calendar
+                | Schedule
+            -else
+              li= link_to edit_schedule_path(current_user.schedule) do
+                i.glyphicon.glyphicon-calendar
+                | Schedule
             li= link_to logout_path, method: :delete do
               i.glyphicon.glyphicon-log-out>
               | Logout

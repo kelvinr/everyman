@@ -16,4 +16,16 @@ class ApplicationController < ActionController::Base
   def is_logged_in
     redirect_to home_path if current_user
   end
+
+  def require_user
+    if !logged_in?
+      flash[:danger] = "You must be logged in to do that!"
+      redirect_to login_path
+    end
+  end
+
+  def access_denied
+    flash[:danger] = "You aren't allowed to do that!"
+    redirect_to root_path
+  end
 end

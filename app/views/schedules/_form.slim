@@ -1,0 +1,38 @@
+=render 'shared/errors', obj: @schedule
+#user-form
+  = form_for @schedule do |f|
+    .input
+      = f.label :start_date
+      .field
+        = f.date_field :start_date
+    
+    .input
+      = f.label :end_date
+      .field
+        = f.date_field :end_date
+    
+    .input
+      = f.label :daily_sleep_goal
+      .field
+        = f.text_field :daily_sleep_goal
+        
+    .input
+      = f.label :core_sleep
+      .field
+        = f.text_field :core_sleep
+        
+    .input
+      = f.label :nap_count, "Total Naps"
+      .field
+        = f.number_field :nap_count
+      
+    .input
+      = f.label :nap_duration
+      .field
+        = f.text_field :nap_duration
+    
+    .input
+      = f.submit "Save", class: "btn btn-primary"
+        
+- content_for :javascript do
+  = javascript_include_tag 'jquery.datetimepicker', 'schedule'

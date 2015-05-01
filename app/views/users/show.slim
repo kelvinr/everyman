@@ -1,1 +1,23 @@
-=@user.username
+.col-md-10.col-md-offset-1
+  h3 
+    ' Username:
+    =@user.username.capitalize
+  -if @user.schedule != nil
+    h3 
+      ' Schedule start date:
+      =@user.start_date
+    h3
+      ' Schedule end date:
+      =@user.end_date
+    h3 
+      ' Daily sleep goal:
+      =@user.daily_sleep_goal
+    h3 
+      ' Core sleep:
+      =@user.core_sleep
+    h3 
+      ' Naps:
+      =@user.nap_count
+    h3
+      ' Nap duration:
+      =@user.nap_duration
