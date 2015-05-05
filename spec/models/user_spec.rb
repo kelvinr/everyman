@@ -7,6 +7,7 @@ describe User do
 
   it { should have_one(:schedule) }
   it { should have_many(:experiences) }
+  it { should have_many(:questions) }
 
   it { should delegate_method(:start_date).to(:schedule) }
   it { should delegate_method(:end_date).to(:schedule) }

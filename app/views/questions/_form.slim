@@ -1,0 +1,17 @@
+= render 'shared/errors', obj: @question
+
+#user-form
+  h1 New Question
+  = form_for @question do |f|
+    .input
+      = f.label :question
+      .field
+        = f.text_field :question
+    
+    .input
+      = f.label :additional_info
+      .field
+        = f.text_area :additional_info
+        
+    .input
+      = f.submit "Create", class: "btn btn-primary"
