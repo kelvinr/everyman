@@ -2,37 +2,49 @@
 #user-form
   = form_for @schedule do |f|
     .input
-      = f.label :start_date
-      .field
-        = f.date_field :start_date
+      .input-group.date#start
+        = f.label :start_date
+        = f.text_field :start_date
+        span.input-group-addon
+          span.glyphicon.glyphicon-calendar
+          
+    .input
+      .input-group.date#end
+        = f.label :end_date
+        = f.text_field :end_date
+        span.input-group-addon
+          span.glyphicon.glyphicon-calendar
     
     .input
-      = f.label :end_date
-      .field
-        = f.date_field :end_date
-    
-    .input
-      = f.label :daily_sleep_goal
-      .field
+      .input-group.date#daily
+        = f.label :daily_sleep_goal, "Daily total"
         = f.text_field :daily_sleep_goal
+        span.input-group-addon
+          span.glyphicon.glyphicon-time
         
     .input
-      = f.label :core_sleep
-      .field
+      .input-group.date#core
+        = f.label :core_sleep
         = f.text_field :core_sleep
+        span.input-group-addon
+          span.glyphicon.glyphicon-time
         
     .input
-      = f.label :nap_count, "Total Naps"
-      .field
-        = f.number_field :nap_count
+      .input-group.date#nap-count
+        = f.label :nap_count, "Total Naps"
+        = f.text_field :nap_count
+        span.input-group-addon
+          span.glyphicon.glyphicon-dashboard
       
     .input
-      = f.label :nap_duration
-      .field
+      .input-group.date#nap-duration
+        = f.label :nap_duration
         = f.text_field :nap_duration
+        span.input-group-addon
+          span.glyphicon.glyphicon-time
     
     .input
       = f.submit "Save", class: "btn btn-primary"
-        
+
 - content_for :javascript do
-  = javascript_include_tag 'jquery.datetimepicker', 'schedule'
+  = javascript_include_tag 'schedule'
