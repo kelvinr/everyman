@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "User interacts with schedule" do
 
-  scenario "user creates schedule with valid info" do
+  scenario "User creates schedule with valid info" do
     login
     visit new_schedule_path
 
@@ -19,7 +19,7 @@ feature "User interacts with schedule" do
     expect(page).to have_content "Your schedule has been created."
   end
 
-  scenario "user enters invalid infomation" do
+  scenario "User enters invalid infomation" do
     login
     visit new_schedule_path
 
@@ -36,7 +36,7 @@ feature "User interacts with schedule" do
     expect(page).to have_content "The Form contains 2 errors"
   end
 
-  scenario "user updates their schedule" do
+  scenario "User edits their schedule" do
     bob = Fabricate(:user)
     login(bob)
     Fabricate(:schedule, user: bob, nap_count: 3)

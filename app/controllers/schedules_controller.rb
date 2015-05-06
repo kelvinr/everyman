@@ -1,7 +1,7 @@
 class SchedulesController < ApplicationController
   before_action :require_user
   before_action :get_schedule, only: [:edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action -> { correct_user(@schedule) }, only: [:edit, :update]
 
   def new
     @schedule = Schedule.new
@@ -34,10 +34,6 @@ class SchedulesController < ApplicationController
     end
 
     def get_schedule
-      @schedule = Schedule.find_by(user_id: current_user.id)
-    end
-
-    def correct_user
-      access_denied unless @schedule.user == current_user
+      @schedule = current_user.schedule
     end
 end

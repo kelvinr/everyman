@@ -43,41 +43,51 @@ describe SchedulesController do
   end
 
   describe "GET edit" do
+    let(:schedule) { Fabricate(:schedule, user: bob)}
+
     it "sets @schedule to current users schedule" do
-      get :edit, id: Fabricate(:schedule, user: bob).id
+      get :edit, id: schedule.id
       expect(assigns(:schedule)).to eq(bob.schedule)
     end
 
     it_behaves_like "require login" do
-      let(:action) { get :edit, id: 2 }
+      let(:action) { get :edit, id: schedule.id }
+    end
+
+    it_behaves_like "require correct user" do
+      let(:action) { get :edit, id: schedule.id }
     end
   end
 
-  describe "POST update" do
+  describe "PATCH update" do
     let(:schedule) { Fabricate(:schedule, user: bob) }
 
     it "updates schedule with valid input" do
-      post :update, id: schedule.id, schedule: {nap_count: 7}
+      patch :update, id: schedule.id, schedule: {nap_count: 7}
       expect(bob.reload.nap_count).to eq(7)
     end
 
     it "sets the flash message" do
-      post :update, id: schedule.id, schedule: schedule.attributes
+      patch :update, id: schedule.id, schedule: schedule.attributes
       expect(flash[:success]).not_to be_nil
     end
 
     it "redirects to the users page with valid input" do
-      post :update, id: schedule.id, schedule: schedule.attributes
+      patch :update, id: schedule.id, schedule: schedule.attributes
       expect(response).to redirect_to bob
     end
 
     it "renders edit when invalid input" do
-      post :update, id: schedule.id, schedule: {start_date: nil}
+      patch :update, id: schedule.id, schedule: {start_date: nil}
       expect(response).to render_template :edit
     end
 
     it_behaves_like "require login" do
-      let(:action) { post :update, id: 1, schedule: Fabricate.attributes_for(:schedule) }
+      let(:action) { patch :update, id: schedule.id, schedule: schedule.attributes }
+    end
+
+    it_behaves_like "require correct user" do
+      let(:action) { patch :update, id: schedule.id, schedule: schedule.attributes }
     end
   end
 end

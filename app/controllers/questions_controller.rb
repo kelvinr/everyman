@@ -1,9 +1,15 @@
 class QuestionsController < ApplicationController
-  before_action :require_user, except: [:index]
+  before_action :require_user, except: [:index, :show]
   before_action :get_question, only: [:edit, :update]
+  before_action -> { correct_user(@question) }, only: [:edit, :update]
 
   def index
     @questions = Question.all.order(:created_at).reverse_order
+  end
+
+  def show
+    @question = Question.find(params[:id])
+    @comment = Comment.new
   end
 
   def new
@@ -37,6 +43,6 @@ class QuestionsController < ApplicationController
     end
 
     def get_question
-      @question = current_user.questions.find(params[:id])
+      @question = current_user.questions.find_by(id: params[:id])
     end
 end

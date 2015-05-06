@@ -27,7 +27,7 @@ feature "User interacts with experiences" do
     Fabricate(:experience, user: User.first)
 
     visit experiences_path
-    expect(find(".pull-right")).to have_content "Edit"
+    expect(find("small.pull-right")).to have_content "Edit"
   end
 
   scenario "User updates expierence" do

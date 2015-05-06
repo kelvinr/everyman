@@ -1,9 +1,15 @@
 class ExperiencesController < ApplicationController
   before_action :require_user, except: [:index, :show]
   before_action :get_experience, only: [:edit, :update]
+  before_action -> { correct_user(@experience) }, only: [:edit, :update]
 
   def index
     @experiences = Experience.all
+  end
+
+  def show
+    @experience = Experience.find(params[:id])
+    @comment = Comment.new
   end
 
   def new
@@ -15,7 +21,7 @@ class ExperiencesController < ApplicationController
 
     if @experience.save
       flash[:success] = "Your experience has been posted."
-      redirect_to experiences_path
+      redirect_to @experience
     else
       render :new
     end
@@ -24,7 +30,7 @@ class ExperiencesController < ApplicationController
   def update
     if @experience.update(experience_params)
       flash[:success] = "Your post has been update."
-      redirect_to experiences_path
+      redirect_to @experience
     else
       render :new
     end
@@ -37,6 +43,6 @@ class ExperiencesController < ApplicationController
     end
 
     def get_experience
-      @experience = current_user.experiences.find(params[:id])
+      @experience = current_user.experiences.find_by(id: params[:id])
     end
 end

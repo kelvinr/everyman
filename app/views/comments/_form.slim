@@ -1,0 +1,12 @@
+-new_comment = @comment.new_record?
+
+= render 'shared/errors', obj: @comment
+
+#content-form
+  h1= new_comment ? "New Comment" : "Edit Comment"
+  = form_for [commentable, @comment] do |f|
+    .input
+      = f.text_area :content, class: "form-control"
+    
+    .input
+      = f.submit new_comment ? "Create" : "Update", class: "btn btn-success"

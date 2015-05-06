@@ -28,7 +28,7 @@ feature "User interacts with questions" do
     Fabricate(:question, user: User.first)
 
     visit questions_path
-    expect(find(".pull-right")).to have_content "Edit"
+    expect(find("small.pull-right")).to have_content "Edit"
   end
 
   scenario "User updates question" do

@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   resources :schedules, only: [:new, :create, :edit, :update]
 
-  resources :experiences, except: :destroy
+  resources :experiences, except: :destroy do
+    resources :comments, only: [:create, :edit, :update]
+  end
 
-  resources :questions, except: :destroy
+  resources :questions, except: :destroy do
+    resources :comments, only: [:create, :edit, :update]
+  end
 end

@@ -1,7 +1,7 @@
 .container.area
-  h4=question.question
+  h4= link_to question.question, question
   p
-    =question.additional_info
+    = question.additional_info
   small
     = question.user.username
     '  | posted

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe QuestionsController do
   let(:bob) { Fabricate(:user) }
+  let(:question) { Fabricate(:question, user: bob) }
 
   describe "GET index" do
     it "sets @questions in desc order" do
@@ -9,6 +10,18 @@ describe QuestionsController do
       que2 = Fabricate(:question)
       get :index
       expect(assigns(:questions)).to eq([que2,que1])
+    end
+  end
+
+  describe "GET show" do
+    before { get :show, id: question }
+
+    it "sets @question" do
+      expect(assigns(:question)).to eq(question)
+    end
+
+    it "sets @comment" do
+      expect(assigns(:comment)).to be_a_new(Comment)
     end
   end
 
@@ -59,46 +72,51 @@ describe QuestionsController do
   describe "GET edit" do
     it "sets @question" do
       set_current_user(bob)
-      question = Fabricate(:question, user: bob)
-      get :edit, id: question.id
+      get :edit, id: question
       expect(assigns(:question)).to eq(question)
     end
 
     it_behaves_like "require login" do
-      let(:action) { get :edit, id: 1 }
+      let(:action) { get :edit, id: question }
+    end
+
+    it_behaves_like "require correct user" do
+      let(:action) { get :edit, id: question }
     end
   end
 
-  describe "POST update" do
+  describe "PATCH update" do
     before { set_current_user(bob) }
-    let(:question) { Fabricate(:question, user: bob) }
 
     context "with valid input" do
       it "redirects to the questions page" do
-        post :update, id: question.id, question: {additional_info: "Can you answer this question?"}
+        patch :update, id: question, question: {additional_info: "Can you answer this question?"}
         expect(response).to redirect_to :questions
       end
 
       it "sets flash message" do
-        post :update, id: question.id, question: {question: "Is a valid question?"}
+        patch :update, id: question, question: {question: "Is a valid question?"}
         expect(flash[:success]).not_to be_nil
       end
 
       it "updates the question" do
-        post :update, id: question.id, question: {question: "Is this a valid question?"}
+        patch :update, id: question, question: {question: "Is this a valid question?"}
         expect(question.reload.question).to eq("Is this a valid question?")
       end
     end
 
-    context "with invalid input or unathenticated user" do
-
+    context "with invalid input or user" do
       it "renders the edit template" do
-        post :update, id: question.id, question: {question: nil}
+        patch :update, id: question, question: {question: nil}
         expect(response).to render_template :edit
       end
 
       it_behaves_like "require login" do
-        let(:action) { post :update, id: question.id }
+        let(:action) { patch :update, id: question }
+      end
+
+      it_behaves_like "require correct user" do
+        let(:action) { patch :update, id: question}
       end
     end
   end

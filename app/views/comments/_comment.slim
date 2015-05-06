@@ -1,0 +1,15 @@
+-if comment.valid?
+  section.area
+    p= comment.content
+    small
+      = comment.user.username
+      '  | Posted
+      = time_ago_in_words(comment.created_at)
+    -if logged_in? && comment.user == current_user
+      small.pull-right
+        = link_to [:edit, comment.commentable, comment] do
+          i.glyphicon.glyphicon-edit>
+          '  Edit
+
+        
+        

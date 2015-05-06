@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_one :schedule
   has_many :questions
   has_many :experiences
+  has_many :comments
 
   delegate :start_date, :end_date, :daily_sleep_goal, :core_sleep, :nap_count, :nap_duration, to: :schedule
 end

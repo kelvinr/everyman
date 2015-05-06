@@ -1,0 +1,8 @@
+-obj ||= @comment.commentable
+= render obj
+-if logged_in?
+  .container
+    = render "comments/form", commentable: obj
+.container
+  h3.text-center= obj.comments.any? ? "Comments" : ""
+  = render obj.comments
