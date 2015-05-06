@@ -1,11 +1,11 @@
 $(function() {
   $("#start").datetimepicker({
-    format: "MMMM-D-YYYY",
-    extraFormats: ["MMMM / D / YY"]
+    format: "MMMM D YYYY",
+    extraFormats: ["MMMM D YY"]
   }),
   $("#end").datetimepicker({
-    format: "MMMM-D-YYYY",
-    extraFormats: ["MMMM / D / YY"]
+    format: "MMMM D YYYY",
+    extraFormats: ["MMMM D YY"]
   }),
   $("#daily").datetimepicker({
     format: " h : mm"
