@@ -37,6 +37,6 @@ class ExperiencesController < ApplicationController
     end
 
     def get_experience
-      @experience = Experience.find_by(user: current_user)
+      @experience = current_user.experiences.find(params[:id])
     end
 end

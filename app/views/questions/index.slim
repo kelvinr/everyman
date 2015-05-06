@@ -1,0 +1,9 @@
+-if logged_in?
+  section
+    #new-experience-link
+      = link_to new_question_path do
+        i.glyphicon.glyphicon-question-sign>
+        | Ask a question
+        
+section
+  = render @questions

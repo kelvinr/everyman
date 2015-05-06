@@ -1,0 +1,13 @@
+.container.area
+  h4=question.question
+  p
+    =question.additional_info
+  small
+    = question.user.username
+    '  | posted
+    = time_ago_in_words(question.created_at)
+  -if logged_in? && question.user == current_user
+    small.pull-right
+      = link_to edit_question_path(question) do
+        i.glyphicon.glyphicon-edit>
+        '  Edit
