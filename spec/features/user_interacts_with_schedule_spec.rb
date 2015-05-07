@@ -7,9 +7,9 @@ feature "User interacts with schedule" do
     visit new_schedule_path
 
     within("#new_schedule") do
-      fill_in "Start date", with: Date.new
-      fill_in "End date", with: Date.new
-      fill_in "Daily sleep goal", with: Time.new
+      fill_in "Start date", with: Time.new.strftime("%Y-%m-%d")
+      fill_in "End date", with: Time.new.strftime("%Y-%m-%d")
+      fill_in "Daily total", with: Time.new
       fill_in "Core sleep", with: Time.new
       fill_in "Total Naps", with: 4
       fill_in "Nap duration", with: Time.new
@@ -24,9 +24,9 @@ feature "User interacts with schedule" do
     visit new_schedule_path
 
     within("#new_schedule") do
-      fill_in "Start date", with: Date.new
-      fill_in "End date", with: Date.new
-      fill_in "Daily sleep goal", with: Time.new
+      fill_in "Start date", with: Time.new.strftime("%Y-%m-%d")
+      fill_in "End date", with: Time.new.strftime("%Y-%m-%d")
+      fill_in "Daily total", with: Time.new
       fill_in "Core sleep", with: Time.new
       fill_in "Total Naps", with: nil
       fill_in "Nap duration", with: nil
@@ -43,7 +43,11 @@ feature "User interacts with schedule" do
     visit edit_schedule_path(bob.schedule)
 
     within("#edit_schedule_#{bob.schedule.id}") do
+      fill_in "Start date", with: Time.new.strftime("%Y-%m-%d")
+      fill_in "Daily total", with: Time.new
+      fill_in "Core sleep", with: Time.new
       fill_in "Total Naps", with: 4
+      fill_in "Nap duration", with: Time.new
     end
 
     click_button "Save"

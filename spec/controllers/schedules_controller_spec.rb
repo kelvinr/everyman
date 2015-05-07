@@ -18,27 +18,27 @@ describe SchedulesController do
 
   describe "POST create" do
     it "creates schedule with valid input" do
-      post :create, schedule: Fabricate.attributes_for(:schedule)
+      post :create, schedule: Fabricate.attributes_for(:schedule, user: bob)
       expect(Schedule.count).to eq(1)
     end
 
     it "redirects to user page on valid save" do
-      post :create, schedule: Fabricate.attributes_for(:schedule)
+      post :create, schedule: Fabricate.attributes_for(:schedule, user: bob)
       expect(response).to redirect_to bob
     end
 
     it "sets flash on successful save" do
-      post :create, schedule: Fabricate.attributes_for(:schedule)
+      post :create, schedule: Fabricate.attributes_for(:schedule, user: bob)
       expect(flash[:success]).not_to be_nil
     end
 
     it "renders the new template with invalid input" do
-      post :create, schedule: Fabricate.attributes_for(:schedule, start_date: nil)
+      post :create, schedule: Fabricate.attributes_for(:schedule, start_date: nil, user: bob)
       expect(response).to render_template :new
     end
 
     it_behaves_like "require login" do
-      let(:action) { post :create, schedule: Fabricate.attributes_for(:schedule) }
+      let(:action) { post :create, schedule: Fabricate.attributes_for(:schedule, user: bob) }
     end
   end
 
@@ -63,17 +63,17 @@ describe SchedulesController do
     let(:schedule) { Fabricate(:schedule, user: bob) }
 
     it "updates schedule with valid input" do
-      patch :update, id: schedule.id, schedule: {nap_count: 7}
+      patch :update, id: schedule, schedule: {nap_count: 7}
       expect(bob.reload.nap_count).to eq(7)
     end
 
     it "sets the flash message" do
-      patch :update, id: schedule.id, schedule: schedule.attributes
+      patch :update, id: schedule, schedule: Fabricate.attributes_for(:schedule)
       expect(flash[:success]).not_to be_nil
     end
 
     it "redirects to the users page with valid input" do
-      patch :update, id: schedule.id, schedule: schedule.attributes
+      patch :update, id: schedule, schedule: Fabricate.attributes_for(:schedule)
       expect(response).to redirect_to bob
     end
 

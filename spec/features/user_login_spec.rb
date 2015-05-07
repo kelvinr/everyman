@@ -5,7 +5,7 @@ feature 'User login' do
     bob = Fabricate(:user)
     visit login_path
     within("#user-form") do
-      fill_in "Username / Email", with: bob.username
+      fill_in "Username", with: bob.username
       fill_in "Password", with: bob.password
     end
 
@@ -17,7 +17,7 @@ feature 'User login' do
     alice = Fabricate(:user)
     visit login_path
     within("#user-form") do
-      fill_in "Username / Email", with: alice.username
+      fill_in "Username", with: alice.username
       fill_in "Password", with: alice.password + "jkaflda"
     end
 
