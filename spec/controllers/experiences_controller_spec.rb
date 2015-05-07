@@ -11,7 +11,7 @@ describe ExperiencesController do
     end
   end
 
-  describe "Get show" do
+  describe "GET show" do
     before { get :show, id: exp.id }
 
     it "sets @experience" do
