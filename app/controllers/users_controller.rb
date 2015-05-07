@@ -12,8 +12,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      log_in(@user)
       flash[:success] = "Thanks for joining! Welcome and enjoy."
-      redirect_to root_path
+      redirect_to @user
     else
       render :new
     end

@@ -30,7 +30,7 @@ describe UsersController do
 
       it "redirects to the home page after user creation" do
         post :create, user: Fabricate.attributes_for(:user)
-        expect(response).to redirect_to :root
+        expect(response).to redirect_to User.first
       end
     end
 
