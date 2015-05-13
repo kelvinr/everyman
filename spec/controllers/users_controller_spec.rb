@@ -18,18 +18,17 @@ describe UsersController do
 
   describe "POST create" do
     context "with valid input" do
+      before { post :create, user: Fabricate.attributes_for(:user) }
+
       it "creates the user" do
-        post :create, user: Fabricate.attributes_for(:user)
         expect(User.count).to eq(1)
       end
 
       it "set flash message" do
-        post :create, user: Fabricate.attributes_for(:user)
         expect(flash[:success]).not_to be_nil
       end
 
       it "redirects to the home page after user creation" do
-        post :create, user: Fabricate.attributes_for(:user)
         expect(response).to redirect_to User.first
       end
     end

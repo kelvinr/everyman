@@ -16,7 +16,7 @@ describe CommentsController do
         expect(response).to redirect_to que
       end
 
-      it "creates comment with valid info" do
+      it "creates comment" do
         expect(que.comments.count).to eq(1)
       end
 
@@ -25,11 +25,9 @@ describe CommentsController do
       end
     end
 
-    context "with invalid input or unauthenticated user" do
-      it "renders the commentable show page with invalid input" do
-        post :create, question_id: que, comment: {content: nil}
-        expect(response).to render_template "questions/show"
-      end
+    it "renders the commentable show page with invalid input" do
+      post :create, question_id: que, comment: {content: nil}
+      expect(response).to render_template "questions/show"
     end
 
     it_behaves_like "require login" do

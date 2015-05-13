@@ -41,18 +41,17 @@ describe QuestionsController do
     before { set_current_user }
 
     context "with valid input" do
+      before { post :create, question: Fabricate.attributes_for(:question) }
+
       it "redirects to questions page on creation" do
-        post :create, question: Fabricate.attributes_for(:question)
         expect(response).to redirect_to :questions
       end
 
       it "creates question with valid input" do
-        post :create, question: Fabricate.attributes_for(:question)
         expect(Question.count).to eq(1)
       end
 
       it "sets the flash message" do
-        post :create, question: Fabricate.attributes_for(:question)
         expect(flash[:success]).not_to be_nil
       end
     end
@@ -89,18 +88,17 @@ describe QuestionsController do
     before { set_current_user(bob) }
 
     context "with valid input" do
+      before { patch :update, id: question, question: {question: "Is this a valid question?"} }
+
       it "redirects to the questions page" do
-        patch :update, id: question, question: {additional_info: "Can you answer this question?"}
         expect(response).to redirect_to :questions
       end
 
       it "sets flash message" do
-        patch :update, id: question, question: {question: "Is a valid question?"}
         expect(flash[:success]).not_to be_nil
       end
 
       it "updates the question" do
-        patch :update, id: question, question: {question: "Is this a valid question?"}
         expect(question.reload.question).to eq("Is this a valid question?")
       end
     end

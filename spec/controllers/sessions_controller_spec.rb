@@ -11,52 +11,50 @@ describe SessionsController do
 
   describe "POST create" do
     let(:bob) { Fabricate(:user) }
+
     context "with valid input" do
+      before { post :create, username: bob.username, password: bob.password }
 
       it "redirects to user page" do
-        post :create, username: bob.username, password: bob.password
         expect(response).to redirect_to bob
       end
 
       it "stores user in session" do
-        post :create, username: bob.username, password: bob.password
         expect(session[:user_id]).not_to be_nil
       end
 
       it "sets flash success message" do
-        post :create, username: bob.username, password: bob.password
         expect(flash[:success]).not_to be_nil
       end
     end
 
     context "with invalid input" do
+      before { post :create, username: bob.username, password: bob.password + "wrong" }
       it "renders the login page" do
-        post :create, username: bob.username, password: bob.password + "dakfj"
         expect(response).to render_template :new
       end
 
       it "sets flash error message" do
-        post :create, username: bob.username, password: bob.password + "kdjfakl"
         expect(flash[:danger]).not_to be_nil
       end
     end
   end
 
   describe "DELETE destroy" do
-    before { session[:user_id] = Fabricate(:user).id }
+    before do
+      set_current_user
+      delete :destroy
+    end
 
     it "redirects to the home page" do
-      delete :destroy
       expect(response).to redirect_to :root
     end
 
     it "sets the session to nil" do
-      delete :destroy
       expect(session[:user_id]).to be_nil
     end
 
     it "sets flash message" do
-      delete :destroy
       expect(flash[:info]).not_to be_nil
     end
   end

@@ -4,6 +4,7 @@ feature 'User login' do
   scenario "with valid info" do
     bob = Fabricate(:user)
     visit login_path
+
     within("#user-form") do
       fill_in "Username", with: bob.username
       fill_in "Password", with: bob.password
@@ -16,6 +17,7 @@ feature 'User login' do
   scenario "with invalid info" do
     alice = Fabricate(:user)
     visit login_path
+    
     within("#user-form") do
       fill_in "Username", with: alice.username
       fill_in "Password", with: alice.password + "jkaflda"

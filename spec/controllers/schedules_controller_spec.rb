@@ -17,28 +17,31 @@ describe SchedulesController do
   end
 
   describe "POST create" do
-    it "creates schedule with valid input" do
-      post :create, schedule: Fabricate.attributes_for(:schedule, user: bob)
-      expect(Schedule.count).to eq(1)
+    context "with valid input" do
+      before { post :create, schedule: Fabricate.attributes_for(:schedule, user: bob) }
+
+      it "creates schedule with valid input" do
+        expect(Schedule.count).to eq(1)
+      end
+
+      it "redirects to user page on valid save" do
+        expect(response).to redirect_to bob
+      end
+
+      it "sets flash on successful save" do
+        expect(flash[:success]).not_to be_nil
+      end
     end
 
-    it "redirects to user page on valid save" do
-      post :create, schedule: Fabricate.attributes_for(:schedule, user: bob)
-      expect(response).to redirect_to bob
-    end
+    context "with invalid input or user" do
+      it "renders the new template" do
+        post :create, schedule: Fabricate.attributes_for(:schedule, start_date: nil, user: bob)
+        expect(response).to render_template :new
+      end
 
-    it "sets flash on successful save" do
-      post :create, schedule: Fabricate.attributes_for(:schedule, user: bob)
-      expect(flash[:success]).not_to be_nil
-    end
-
-    it "renders the new template with invalid input" do
-      post :create, schedule: Fabricate.attributes_for(:schedule, start_date: nil, user: bob)
-      expect(response).to render_template :new
-    end
-
-    it_behaves_like "require login" do
-      let(:action) { post :create, schedule: Fabricate.attributes_for(:schedule, user: bob) }
+      it_behaves_like "require login" do
+        let(:action) { post :create, schedule: Fabricate.attributes_for(:schedule, user: bob) }
+      end
     end
   end
 
