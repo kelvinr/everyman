@@ -1,22 +1,22 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
-gem 'rails', '4.2.1'
+ruby '2.6.3'
+gem 'rails', '6.0'
 
-gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass', '>= 3.3.3'
+gem 'sass-rails'
+gem 'bootstrap-sass'
 
-gem 'momentjs-rails', '>= 2.8.1'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
 
 gem 'pg'
 gem 'bcrypt'
-gem 'slim', '>= 3.0.3'
+gem 'slim'
 
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 gem 'jquery-rails'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'jbuilder', '~> 2.0'
+gem 'coffee-rails'
+gem 'jbuilder'
 gem 'turbolinks'
 
 gem 'faker'
